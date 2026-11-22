@@ -39,6 +39,7 @@ ion-title {
 ion-button {
   font-family: Dongle;
   font-size: 30px;
+  --color: white;
 }
 
 ion-picker {
@@ -47,19 +48,29 @@ ion-picker {
 }
 
 // .ion-modal {
-//   background-color: #91cfff;
-//   border-radius: 4px;
+//   --font: Dongle;
 // }
 
 .save {
-  background-color: #e391ff;
-  color: black;
+  background-color: #225b5a;
+  border-radius: 2px;
+}
+
+.cancel {
+  background-color: #792440;
   border-radius: 2px;
 }
 
 .add-entry {
-  padding: 15px;
+  padding: 5px;
+  margin: 15px;
+  // height: 50px;
+  // aspect-ratio: 4/3;
+  // overflow: hidden;
 }
+// .add-sleepiness {
+//   background-color: rgb(85, 40, 92);
+// }
 
 ng-template {
   font-family: "Nerko One", "Arial Narrow", Arial, sans-serif;
@@ -74,4 +85,15 @@ ion-card {
   font-family: Dongle;
   font-size: 30px;
   background-color: #1b183c;
+}
+
+ion-segment {
+  --background: #233779;
+  font-family: Dongle;
+  margin: 10px;
+  align-items: center;
+
+  ion-label {
+    font-size: 25px;
+  }
 }

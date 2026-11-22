@@ -16,7 +16,16 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCardContent,
+  IonLabel,
+  IonSegment,
+  IonSegmentButton,
+  IonSegmentContent,
+  IonSegmentView,
+  IonPicker,
+  IonPickerColumn,
+  IonPickerColumnOption,
 } from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
 import { SleepService } from '../services/sleep.service';
 import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
@@ -43,28 +52,56 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
     IonCardSubtitle,
     IonCardContent,
     DateTimePickerComponent,
+    IonLabel,
+    IonSegment,
+    IonSegmentButton,
+    IonSegmentContent,
+    IonSegmentView,
+    FormsModule,
+    IonPicker,
+    IonPickerColumn,
+    IonPickerColumnOption,
   ],
 })
 export class HomePage {
   bedtime = new Date();
   waketime = new Date();
+  sleepinessTime = new Date();
+  sleepinessLevel: number = 1;
+  scaleValues = StanfordSleepinessData.ScaleValues;
+
   constructor(public sleepService: SleepService) {}
 
   ngOnInit() {
     console.log(this.allSleepData);
   }
 
-  logEntry() {
+  logHoursEntry() {
     this.bedtime = new Date();
     this.waketime = new Date(0);
-    this.setOpen(false);
+    this.setLogHoursOpen(false);
   }
 
-  saveEntry() {
+  logSleepinessEntry() {
+    this.sleepinessLevel = 1;
+    this.setSleepinessOpen(false);
+  }
+
+  saveHoursEntry() {
     if (this.waketime < this.bedtime) return;
     var sleepDataObj = new OvernightSleepData(this.bedtime, this.waketime);
     this.sleepService.logOvernightData(sleepDataObj);
-    this.setOpen(false);
+    this.setLogHoursOpen(false);
+  }
+
+  saveSleepinessEntry() {
+    var sleepinessObj = new StanfordSleepinessData(
+      this.sleepinessLevel,
+      this.sleepinessTime,
+    );
+    this.sleepService.logSleepinessData(sleepinessObj);
+    // this.sleepService.logOvernightData(sleepDataObj);
+    this.setSleepinessOpen(false);
   }
 
   /* Ionic doesn't allow bindings to static variables, so this getter can be used instead. */
@@ -78,9 +115,21 @@ export class HomePage {
     );
   }
 
-  isModalOpen = false;
+  get sleepinessData() {
+    return [...SleepService.AllSleepinessData].sort(
+      (a, b) => b.loggedAt.getTime() - a.loggedAt.getTime(),
+    );
+  }
 
-  setOpen(isOpen: boolean) {
+  isModalOpen = false;
+  view = 'hours-slept';
+  isSleepinessOpen = false;
+
+  setLogHoursOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+  }
+
+  setSleepinessOpen(isOpen: boolean) {
+    this.isSleepinessOpen = isOpen;
   }
 }
