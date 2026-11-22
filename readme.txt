@@ -16,11 +16,12 @@
 
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
+https://www.youtube.com/watch?v=5MC1T8pS7gY 
 
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-
+N/A
 
 
 5. Is there anything special we need to know in order to run your code?

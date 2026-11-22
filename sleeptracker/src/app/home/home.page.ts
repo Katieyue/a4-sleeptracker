@@ -24,7 +24,12 @@ import {
   IonPicker,
   IonPickerColumn,
   IonPickerColumnOption,
+  IonIcon,
+  IonFab,
+  IonFabButton,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { add, addCircle } from 'ionicons/icons';
 import { FormsModule } from '@angular/forms';
 import { SleepService } from '../services/sleep.service';
 import { SleepData } from '../data/sleep-data';
@@ -61,6 +66,9 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
     IonPicker,
     IonPickerColumn,
     IonPickerColumnOption,
+    IonIcon,
+    IonFab,
+    IonFabButton,
   ],
 })
 export class HomePage {
@@ -70,7 +78,9 @@ export class HomePage {
   sleepinessLevel: number = 1;
   scaleValues = StanfordSleepinessData.ScaleValues;
 
-  constructor(public sleepService: SleepService) {}
+  constructor(public sleepService: SleepService) {
+    addIcons({ add, addCircle });
+  }
 
   ngOnInit() {
     console.log(this.allSleepData);

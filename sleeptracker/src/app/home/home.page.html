@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title>
       <img
         src="assets/crescent-moon.png"
@@ -8,46 +8,67 @@
       />
       Sleep Tracker App
     </ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Dongle:wght@300;400;700&family=Nerko+One&family=Outfit:wght@100..900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Actor&family=Changa+One:ital@0;1&family=Dongle:wght@300;400;700&family=Nerko+One&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet"
   />
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense"> </ion-header>
+  <!-- <ion-header collapse="condense"> </ion-header> -->
   <h1 class="welcome" style="font-size: 45px">Welcome back!</h1>
   <p class="welcome">View or add to your log</p>
 
   <!-- Segment Tab Labels -->
   <ion-segment [(ngModel)]="view">
     <ion-segment-button value="hours-slept">
-      <ion-label>Hours Slept Log</ion-label>
+      <ion-label style="color: white">Hours Slept Log</ion-label>
     </ion-segment-button>
     <ion-segment-button value="sleepiness">
-      <ion-label>Sleepiness Log</ion-label>
+      <ion-label style="color: white">Sleepiness Log</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <!-- segment content tabs -->
   @if (view == 'hours-slept') {
+  <ion-list>
+    @for (data of overnightSleepData; track data) {
+    <ion-card>
+      <ion-card-header>
+        <!-- <ion-card-subtitle>blah</ion-card-subtitle> -->
+        <ion-card-title>{{data.dateString()}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{data.summaryString()}}</ion-card-content>
+    </ion-card>
+    }
+  </ion-list>
   <!-- add entry button -->
-  <ion-button class="add-entry" expand="block" (click)="setLogHoursOpen(true)"
-    >Log your hours slept</ion-button
-  >
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button
+      fill="clear"
+      class="add-entry add-sleepiness"
+      (click)="setLogHoursOpen(true)"
+      aria-label="Log your hours slept"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <!-- modal to input info -->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
-      <p>Log your sleep!</p>
-      <p>Time you went to bed:</p>
-      <app-date-time-picker [(date)]="bedtime"></app-date-time-picker>
-      <p>Time you woke up:</p>
-      <app-date-time-picker [(date)]="waketime"></app-date-time-picker>
+      <ion-content>
+        <p class="prompt">Time you went to bed:</p>
+        <app-date-time-picker [(date)]="bedtime"></app-date-time-picker>
+        <p class="prompt">Time you woke up:</p>
+        <app-date-time-picker [(date)]="waketime"></app-date-time-picker>
 
-      <!-- cancel/save buttons -->
+        <!-- cancel/save buttons -->
+      </ion-content>
       <ion-toolbar
         ><ion-buttons slot="start">
           <ion-button class="cancel" (click)="setLogHoursOpen(false)"
@@ -63,38 +84,47 @@
     </ng-template>
   </ion-modal>
 
+  } @else {
   <ion-list>
-    @for (data of overnightSleepData; track data) {
+    @for (data of sleepinessData; track data) {
     <ion-card>
       <ion-card-header>
-        <!-- <ion-card-subtitle>blah</ion-card-subtitle> -->
-        <ion-card-title>{{data.dateString()}}</ion-card-title>
+        <ion-card-title>{{data.summaryString()}}</ion-card-title>
       </ion-card-header>
-      <ion-card-content>{{data.summaryString()}}</ion-card-content>
+      <ion-card-content>{{data.loggedAt}}</ion-card-content>
     </ion-card>
     }
   </ion-list>
-  } @else {
-  <ion-button
-    class="add-entry add-sleepiness"
-    expand="block"
-    (click)="setSleepinessOpen(true)"
-    >Log your sleepiness</ion-button
-  >
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button
+      fill="clear"
+      class="add-entry add-sleepiness"
+      (click)="setSleepinessOpen(true)"
+      aria-label="Log your sleepiness"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-modal [isOpen]="isSleepinessOpen">
     <ng-template>
-      <p>Time you want to log:</p>
-      <app-date-time-picker [(date)]="sleepinessTime"></app-date-time-picker>
-      <p>Rate your sleepiness on this scale:</p>
-      <ion-picker>
-        <ion-picker-column [value]="sleepinessLevel"
-          >@for (level of scaleValues; track $index) {
-          <ion-picker-column-option [value]="$index">
-            {{level}}</ion-picker-column-option
+      <ion-content>
+        <p class="prompt">Time you want to log:</p>
+        <app-date-time-picker [(date)]="sleepinessTime"></app-date-time-picker>
+        <p class="prompt">Rate your sleepiness:</p>
+        <ion-picker>
+          <ion-picker-column
+            [value]="sleepinessLevel"
+            (ionChange)="sleepinessLevel=$any($event.detail.value); "
+            >@for (level of scaleValues; track $index) {
+            <ion-picker-column-option [value]="$index">
+              {{$index}} {{level}}</ion-picker-column-option
+            >
+            }</ion-picker-column
           >
-          }</ion-picker-column
-        >
-      </ion-picker>
+        </ion-picker>
+      </ion-content>
 
       <!-- cancel/save buttons -->
       <ion-toolbar
@@ -114,18 +144,6 @@
       >
     </ng-template>
   </ion-modal>
-
-  <ion-list>
-    @for (data of sleepinessData; track data) {
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{data.summaryString()}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>{{data.loggedAt}}</ion-card-content>
-    </ion-card>
-    }
-  </ion-list>
   }
-
   <!-- <div id="container"></div> -->
 </ion-content>

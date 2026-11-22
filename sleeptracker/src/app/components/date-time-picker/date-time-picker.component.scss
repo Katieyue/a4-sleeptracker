@@ -1,0 +1,18 @@
+ion-picker {
+  --highlight-background: rgb(144, 101, 162);
+  --highlight-border-radius: 50px;
+
+  --fade-background-rgb: black;
+}
+
+ion-picker-column-option {
+  background-size: auto auto;
+}
+
+ion-picker-column-option.option-active {
+  color: rgb(255, 243, 150);
+}
+
+ion-picker-column-option:not(.option-active) {
+  color: #8c8c8c;
+}
