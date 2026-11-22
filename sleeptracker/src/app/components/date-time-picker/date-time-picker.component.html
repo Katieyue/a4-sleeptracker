@@ -1,0 +1,56 @@
+<ion-picker>
+  <ion-picker-column
+    [value]="month"
+    (ionChange)="month = $any($event.detail.value); dateSet()"
+  >
+    @for (month of months; track $index) {
+      <ion-picker-column-option [value]="$index">{{
+        month
+      }}</ion-picker-column-option>
+    }
+  </ion-picker-column>
+  <ion-picker-column
+    [value]="day"
+    (ionChange)="day = $any($event.detail.value); dateSet()"
+  >
+    @for (day of days; track day) {
+      <ion-picker-column-option [value]="day">{{
+        day.toString().padStart(2, "0")
+      }}</ion-picker-column-option>
+    }
+  </ion-picker-column>
+  <ion-picker-column
+    [value]="year"
+    (ionChange)="year = $any($event.detail.value); dateSet()"
+  >
+    @for (year of years; track year) {
+      <ion-picker-column-option [value]="year">{{
+        year
+      }}</ion-picker-column-option>
+    }
+  </ion-picker-column>
+
+  <ion-picker-column
+    [value]="hour"
+    (ionChange)="hour = $any($event.detail.value); dateSet()"
+  >
+    @for (hour of hours; track hour) {
+      <ion-picker-column-option [value]="hour">{{
+        hour
+      }}</ion-picker-column-option>
+    }
+  </ion-picker-column>
+
+  <span>: </span>
+
+  <ion-picker-column
+    [value]="minute"
+    (ionChange)="minute = $any($event.detail.value); dateSet()"
+  >
+    @for (min of minutes; track min) {
+      <ion-picker-column-option [value]="min">{{
+        min.toString().padStart(2, "0")
+      }}</ion-picker-column-option>
+    }
+  </ion-picker-column>
+</ion-picker>

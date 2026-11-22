@@ -39,7 +39,9 @@
 
 
 8. How can a person log overnight sleep in your app? Why did you choose to support logging overnight sleep in this way?
-
+A person can log overnight sleep by clicking the "Add entry" button on the home page which will open up a modal with a date/time picker 
+where they can swipe through the options to pick the right start/end time. I picked this option so it's easy to input the times even if the
+user forgot to initially log when they went to bed. 
 
 
 9. How can a person log sleepiness during the day in your app? Why did you choose to support logging sleepiness in this way?

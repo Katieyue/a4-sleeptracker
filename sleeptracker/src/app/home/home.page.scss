@@ -25,3 +25,53 @@
 #container a {
   text-decoration: none;
 }
+
+ion-title {
+  font-family: "Nerko One";
+}
+
+.welcome {
+  font-family: "Nerko One", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+  font-size: 25px;
+}
+
+ion-button {
+  font-family: Dongle;
+  font-size: 30px;
+}
+
+ion-picker {
+  font-family: "Nerko One", "Arial Narrow", Arial, sans-serif;
+  font-size: 30px;
+}
+
+// .ion-modal {
+//   background-color: #91cfff;
+//   border-radius: 4px;
+// }
+
+.save {
+  background-color: #e391ff;
+  color: black;
+  border-radius: 2px;
+}
+
+.add-entry {
+  padding: 15px;
+}
+
+ng-template {
+  font-family: "Nerko One", "Arial Narrow", Arial, sans-serif;
+  font-size: 30px;
+
+  p {
+    padding-left: 4px;
+  }
+}
+
+ion-card {
+  font-family: Dongle;
+  font-size: 30px;
+  background-color: #1b183c;
+}
