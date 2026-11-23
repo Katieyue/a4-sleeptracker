@@ -112,16 +112,17 @@ export class HomePage {
   logHoursEntry() {
     this.bedtime = new Date();
     this.waketime = new Date();
-    this.setLogHoursOpen(false);
+    this.setLogHoursOpen(true);
   }
 
   logSleepinessEntry() {
     this.sleepinessLevel = 1;
-    this.setSleepinessOpen(false);
+    this.sleepinessTime = new Date();
+    this.setSleepinessOpen(true);
   }
 
   saveHoursEntry() {
-    if (this.waketime < this.bedtime) return;
+    if (this.waketime < this.bedtime || this.waketime > new Date()) return;
     var sleepDataObj = new OvernightSleepData(this.bedtime, this.waketime);
     this.sleepService.logOvernightData(sleepDataObj);
     this.setLogHoursOpen(false);
@@ -165,12 +166,16 @@ export class HomePage {
 
   async deleteSleepiness(data: StanfordSleepinessData) {
     this.lastDeletedSleepiness = data;
+    this.lastDeletedHoursSlept = null;
+
     await this.sleepService.deleteSleepinessData(data);
     this.isToastOpen = true;
   }
 
   async deleteHoursSlept(data: OvernightSleepData) {
     this.lastDeletedHoursSlept = data;
+    this.lastDeletedSleepiness = null;
+
     await this.sleepService.deleteHoursSleptData(data);
     this.isToastOpen = true;
   }

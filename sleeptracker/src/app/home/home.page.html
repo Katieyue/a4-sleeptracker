@@ -68,7 +68,7 @@
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button
       class="add-entry add-sleepiness"
-      (click)="setLogHoursOpen(true)"
+      (click)="logHoursEntry()"
       aria-label="Log your hours slept"
     >
       <ion-icon name="add"></ion-icon>
@@ -91,11 +91,11 @@
           <ion-button class="cancel" (click)="setLogHoursOpen(false)"
             >Cancel</ion-button
           >
-          <ion-buttons slot="end">
-            <ion-button class="save" [strong]="true" (click)="saveHoursEntry()"
-              >Save</ion-button
-            >
-          </ion-buttons>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button class="save" [strong]="true" (click)="saveHoursEntry()"
+            >Save</ion-button
+          >
         </ion-buttons></ion-toolbar
       >
     </ng-template>
@@ -134,7 +134,7 @@
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button
       class="add-entry add-sleepiness"
-      (click)="setSleepinessOpen(true)"
+      (click)="logSleepinessEntry()"
       aria-label="Log your sleepiness"
     >
       <ion-icon name="add"></ion-icon>
@@ -151,12 +151,11 @@
           <ion-picker-column
             [value]="sleepinessLevel"
             (ionChange)="sleepinessLevel=$any($event.detail.value); "
-            >@for (level of scaleValues; track $index) {
+            >@for (level of scaleValues; track $index) { @if ($index > 0) {
             <ion-picker-column-option [value]="$index">
-              {{$index}} {{level}}</ion-picker-column-option
-            >
-            }</ion-picker-column
-          >
+              {{$index}}: {{level}}</ion-picker-column-option
+            >}}
+          </ion-picker-column>
         </ion-picker>
       </ion-content>
 
@@ -166,14 +165,14 @@
           <ion-button class="cancel" (click)="setSleepinessOpen(false)"
             >Cancel</ion-button
           >
-          <ion-buttons slot="end">
-            <ion-button
-              class="save"
-              [strong]="true"
-              (click)="saveSleepinessEntry()"
-              >Save</ion-button
-            >
-          </ion-buttons>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button
+            class="save"
+            [strong]="true"
+            (click)="saveSleepinessEntry()"
+            >Save</ion-button
+          >
         </ion-buttons></ion-toolbar
       >
     </ng-template>
