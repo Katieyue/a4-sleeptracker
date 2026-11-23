@@ -41,24 +41,18 @@ as efficienty and intuitively as possible.
 
 
 7. Did you design your app specifically for iOS or Android, or both?
-Both. The app includes common best design practices such as having controls near the bottom of the display (add entry button). 
-Navigation between sections is done via clicking through the ion-segment tabs rather than hardware specific back buttons or swiping.
+Both. The app includes common best design practices such as having controls near the bottom of the display (add entry button). Navigation between sections is done via clicking through the ion-segment tabs rather than hardware specific back buttons or swiping.
 
 8. How can a person log overnight sleep in your app? Why did you choose to support logging overnight sleep in this way?
-A person can log overnight sleep by clicking the add button on the "Hours Slept Log" tab which will open up a modal with a date/time picker 
-where they can swipe through the options to pick the right start/end time. I picked this option so it's easy to input the times even if the
-user forgot to initially log when they went to bed, and the add button is very intuitive.
+A person can log overnight sleep by clicking the add button on the "Hours Slept Log" tab which will open up a modal with a date/time picker where they can swipe through the options to pick the right start/end time. I picked this option so it's easy to input the times even if the user forgot to initially log when they went to bed, and the add button is very intuitive.
 
 
 9. How can a person log sleepiness during the day in your app? Why did you choose to support logging sleepiness in this way?
-To log sleepiness, toggle over to the "Log Sleepiness" section and press the add button. A modal will pop up with a picker 
-for the time (defaults to current time) and a picker for the different levels. This makes it easy since they don't have to type in
-any values and can easily scroll through the options.
+To log sleepiness, toggle over to the "Log Sleepiness" section and press the add button. A modal will pop up with a picker for the time (defaults to current time) and a picker for the different levels. This makes it easy since they don't have to type in any values and can easily scroll through the options.
 
 
 10. How can a person view the data they logged in your app? Why did you choose to support viewing logged data in this way?
-Once any new data has been added, they will display as cards with the date/content (hours slept or sleepiness logged) respective to each
-section. This way the data is shown the second the user opens the app for easy navigation, and toggling between views is very quick.
+Once any new data has been added, they will display as cards with the date/content (hours slept or sleepiness logged) respective to each section. This way the data is shown the second the user opens the app for easy navigation, and toggling between views is very quick.
 
 
 11. Which feature choose--using a native device resource, backing up logged data, or both?
@@ -73,7 +67,4 @@ N/A
 It's backed up to IndexedDB via Ionic Storage.
 
 14. How does your app implement or follow principles of good mobile design?
-The app provides a useful initial view, immediately opening up to the existing data logs with an intuitive add entry button, and also 
-has error prevention by preventing users from saving any entries with waketimes before bedtimes, or waketimes/log times (for logging sleepiness) 
-past the current time. Additionally there is an "uh-oh" button provided by an ion-toast component which provides an undo popup after
-a user has deleted an entry to allow them to restore it.
+The app provides a useful initial view, immediately opening up to the existing data logs with an intuitive add entry button, and also has error prevention by preventing users from saving any entries with waketimes before bedtimes, or waketimes/log times (for logging sleepiness)past the current time. Additionally there is an "uh-oh" button provided by an ion-toast component which provides an undo popup after a user has deleted an entry to allow them to restore it.
