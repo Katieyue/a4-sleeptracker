@@ -17,6 +17,7 @@
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
 https://www.youtube.com/watch?v=5MC1T8pS7gY 
+https://www.freecodecamp.org/news/creating-a-crud-to-do-app-using-ionic-4/
 
 
 

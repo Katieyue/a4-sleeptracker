@@ -37,19 +37,36 @@
   <ion-list>
     @for (data of overnightSleepData; track data) {
     <ion-card>
-      <ion-card-header>
-        <!-- <ion-card-subtitle>blah</ion-card-subtitle> -->
-        <ion-card-title>{{data.dateString()}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>{{data.summaryString()}}</ion-card-content>
+      <div>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>blah</ion-card-subtitle> -->
+          <ion-card-title>{{data.dateString()}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{data.summaryString()}}</ion-card-content>
+      </div>
+      <ion-button fill="clear" color="danger" (click)="deleteHoursSlept(data)">
+        <ion-icon
+          slot="icon-only"
+          name="trash-outline"
+          size="small"
+          aria-label="delete button"
+        ></ion-icon>
+      </ion-button>
     </ion-card>
     }
   </ion-list>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    message="Undo delete? "
+    [duration]="3000"
+    [buttons]="toastButtons"
+    (didDismiss)="setToastOpen(false)"
+  ></ion-toast>
   <!-- add entry button -->
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button
-      fill="clear"
       class="add-entry add-sleepiness"
       (click)="setLogHoursOpen(true)"
       aria-label="Log your hours slept"
@@ -88,17 +105,34 @@
   <ion-list>
     @for (data of sleepinessData; track data) {
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{data.summaryString()}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>{{data.loggedAt}}</ion-card-content>
+      <div>
+        <ion-card-header>
+          <ion-card-title>{{data.summaryString()}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{data.loggedAt}}</ion-card-content>
+      </div>
+      <ion-button fill="clear" color="danger" (click)="deleteSleepiness(data)">
+        <ion-icon
+          slot="icon-only"
+          name="trash-outline"
+          aria-label="delete button"
+          size="small"
+        ></ion-icon>
+      </ion-button>
     </ion-card>
     }
   </ion-list>
 
+  <ion-toast
+    [isOpen]="isToastOpen"
+    message="Undo delete? "
+    [duration]="3000"
+    [buttons]="toastButtons"
+    (didDismiss)="setToastOpen(false)"
+  ></ion-toast>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button
-      fill="clear"
       class="add-entry add-sleepiness"
       (click)="setSleepinessOpen(true)"
       aria-label="Log your sleepiness"

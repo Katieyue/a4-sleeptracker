@@ -27,9 +27,10 @@ import {
   IonIcon,
   IonFab,
   IonFabButton,
+  IonToast,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, addCircle } from 'ionicons/icons';
+import { add, addCircle, trashOutline } from 'ionicons/icons';
 import { FormsModule } from '@angular/forms';
 import { SleepService } from '../services/sleep.service';
 import { SleepData } from '../data/sleep-data';
@@ -69,6 +70,7 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
     IonIcon,
     IonFab,
     IonFabButton,
+    IonToast,
   ],
 })
 export class HomePage {
@@ -83,8 +85,23 @@ export class HomePage {
   isSleepinessOpen = false;
   entriesSaved = signal<boolean>(false);
 
+  isToastOpen = false;
+  lastDeletedHoursSlept: OvernightSleepData | null = null;
+  lastDeletedSleepiness: StanfordSleepinessData | null = null;
+
+  public toastButtons = [
+    {
+      text: 'Undo delete',
+      role: 'cancel',
+      handler: () => {
+        if (this.lastDeletedHoursSlept) this.undoDeleteHours();
+        else this.undoDeleteSleepiness();
+      },
+    },
+  ];
+
   constructor(public sleepService: SleepService) {
-    addIcons({ add, addCircle });
+    addIcons({ add, addCircle, trashOutline });
   }
 
   async ngOnInit() {
@@ -144,5 +161,35 @@ export class HomePage {
 
   setSleepinessOpen(isOpen: boolean) {
     this.isSleepinessOpen = isOpen;
+  }
+
+  async deleteSleepiness(data: StanfordSleepinessData) {
+    this.lastDeletedSleepiness = data;
+    await this.sleepService.deleteSleepinessData(data);
+    this.isToastOpen = true;
+  }
+
+  async deleteHoursSlept(data: OvernightSleepData) {
+    this.lastDeletedHoursSlept = data;
+    await this.sleepService.deleteHoursSleptData(data);
+    this.isToastOpen = true;
+  }
+
+  async undoDeleteHours() {
+    if (this.lastDeletedHoursSlept) {
+      await this.sleepService.logOvernightData(this.lastDeletedHoursSlept);
+      this.lastDeletedHoursSlept = null;
+    }
+  }
+
+  async undoDeleteSleepiness() {
+    if (this.lastDeletedSleepiness) {
+      await this.sleepService.logSleepinessData(this.lastDeletedSleepiness);
+      this.lastDeletedSleepiness = null;
+    }
+  }
+
+  public setToastOpen(open: boolean) {
+    this.isToastOpen = open;
   }
 }

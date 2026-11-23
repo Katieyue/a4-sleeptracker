@@ -103,6 +103,10 @@ ion-segment {
   }
 }
 
+// ion-fab-button {
+//   --background: rgb(144, 101, 162);
+// }
+
 ion-picker {
   --highlight-background: rgb(144, 101, 162);
   --highlight-border-radius: 50px;
@@ -120,6 +124,12 @@ ion-picker-column-option.option-active {
 
 ion-picker-column-option:not(.option-active) {
   color: #8c8c8c;
+}
+
+ion-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .prompt {

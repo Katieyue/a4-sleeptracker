@@ -113,4 +113,20 @@ export class SleepService {
     SleepService.AllSleepinessData.push(sleepData);
     this.save();
   }
+
+  public async deleteSleepinessData(data: StanfordSleepinessData) {
+    const i = SleepService.AllSleepinessData.indexOf(data);
+    SleepService.AllSleepinessData.splice(i, 1);
+    const j = SleepService.AllSleepData.indexOf(data);
+    SleepService.AllSleepData.splice(j, 1);
+    await this.save();
+  }
+
+  public async deleteHoursSleptData(data: OvernightSleepData) {
+    const i = SleepService.AllOvernightData.indexOf(data);
+    SleepService.AllOvernightData.splice(i, 1);
+    const j = SleepService.AllSleepData.indexOf(data);
+    SleepService.AllSleepData.splice(j, 1);
+    await this.save();
+  }
 }
