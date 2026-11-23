@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, signal } from '@angular/core';
 import { DateTimePickerComponent } from '../components/date-time-picker/date-time-picker.component';
 import {
   IonHeader,
@@ -78,17 +78,23 @@ export class HomePage {
   sleepinessLevel: number = 1;
   scaleValues = StanfordSleepinessData.ScaleValues;
 
+  isModalOpen = false;
+  view = 'hours-slept';
+  isSleepinessOpen = false;
+  entriesSaved = signal<boolean>(false);
+
   constructor(public sleepService: SleepService) {
     addIcons({ add, addCircle });
   }
 
-  ngOnInit() {
-    console.log(this.allSleepData);
+  async ngOnInit() {
+    await this.sleepService.loadData();
+    this.entriesSaved.set(true);
   }
 
   logHoursEntry() {
     this.bedtime = new Date();
-    this.waketime = new Date(0);
+    this.waketime = new Date();
     this.setLogHoursOpen(false);
   }
 
@@ -105,6 +111,7 @@ export class HomePage {
   }
 
   saveSleepinessEntry() {
+    if (this.sleepinessTime > new Date()) return;
     var sleepinessObj = new StanfordSleepinessData(
       this.sleepinessLevel,
       this.sleepinessTime,
@@ -130,10 +137,6 @@ export class HomePage {
       (a, b) => b.loggedAt.getTime() - a.loggedAt.getTime(),
     );
   }
-
-  isModalOpen = false;
-  view = 'hours-slept';
-  isSleepinessOpen = false;
 
   setLogHoursOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;

@@ -12,7 +12,7 @@
 - */1 A readme and demo video which explains how these features were implemented and their design rationale
 
 2. How long, in hours, did it take you to complete this assignment?
-
+~18 hrs
 
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
@@ -46,15 +46,18 @@ user forgot to initially log when they went to bed.
 
 
 9. How can a person log sleepiness during the day in your app? Why did you choose to support logging sleepiness in this way?
-
+To log sleepiness, toggle over to the "Log Sleepiness" section and press the plus button. A modal will pop up with a picker 
+for the time (defaults to current time) and a picker for the different levels. This makes it easy since they don't have to type in
+any values and can easily scroll through the options.
 
 
 10. How can a person view the data they logged in your app? Why did you choose to support viewing logged data in this way?
-
+Once any new data has been added, they will display as cards with the date/content (hours slept or sleepiness logged) respective to each
+section. This way the data is shown the second the user opens the app which 
 
 
 11. Which feature choose--using a native device resource, backing up logged data, or both?
-
+Backing up.
 
 
 12. If you used a native device resource, what feature did you add? How does this feature change the app's experience for a user?

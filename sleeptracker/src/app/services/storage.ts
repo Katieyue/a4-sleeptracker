@@ -19,4 +19,9 @@ export class StorageService {
     const storage = await this._storage;
     storage.clear();
   }
+  public async get(key: string) {
+    const storage = await this._storage;
+    let val = await storage.get(key);
+    return val;
+  }
 }
